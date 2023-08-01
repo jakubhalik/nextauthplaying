@@ -1,0 +1,2 @@
+import { signIn } from 'next-auth/react';
+export default function LoginPage() { return<><h1 className="text-lg">Log in your account</h1><button onClick={() => signIn('credentials')}>Login</button></>; }
