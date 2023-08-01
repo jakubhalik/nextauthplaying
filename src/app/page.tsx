@@ -1,2 +1,2 @@
-'use client'; import './globals.css'; import HomePage from './HomePage'; import BatmanPage from './BatmanPage'; import { signIn, useSession } from 'next-auth/react';
-export default function App() { const { data: session } = useSession; return session ? <BatmanPage /> : <HomePage />; }
+'use client'; import './globals.css'; import HomePage from './HomePage';
+export default function App() { return <HomePage />; }
