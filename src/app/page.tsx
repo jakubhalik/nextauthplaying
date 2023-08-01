@@ -1,2 +1,2 @@
-'use client'; import './globals.css';
-export default function App() { return <p>what'sup</p>; }
+'use client'; import './globals.css'; import Homepage from './HomePage';
+export default function App() { return <Homepage />; }
