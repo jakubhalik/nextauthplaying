@@ -11,7 +11,7 @@ type AuthFormProps = {
     title: string, buttonText: string, data: { name: string, email: string, password: string }, 
     handleChange: (e: ChangeEvent<HTMLInputElement>) => void, handleSubmit: (e: FormEvent<HTMLFormElement>) => void 
 }
-export const AuthForm: React.FC<AuthFormProps> = ({ title, buttonText, data, handleChange, handleSubmit }) => <div className="flex justify-center py-24 3xl:py-56">
+export const AuthForm = ({ title, buttonText, data, handleChange, handleSubmit }: AuthFormProps) => <div className="flex justify-center py-24 3xl:py-56">
     <div className="border rounded-md p-4 sm:p-14">
         <h2 className="text-center text-2xl sm:text-3xl font-bold text-gray-900 mb-6">{title}</h2>
         <form className="space-y-6" onSubmit={handleSubmit}>
