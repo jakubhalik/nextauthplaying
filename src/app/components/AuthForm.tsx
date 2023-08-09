@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent } from 'react';
 const Input = ({ name, value, onChange }: { name: string, value: string, onChange: (e: ChangeEvent<HTMLInputElement>) => void}) => <>
     <label htmlFor={name} className={`block text-lg font-medium text-gray-900 ${name !== 'name' ? "mt-3 sm:mt-4" : ""}`}>{name.charAt(0).toUpperCase() + name.slice(1)}</label>
-    <input id={name} type={name} required value={value} onChange={onChange} className="mt-2 block w-full rounded-md p-2 border text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 
+    <input id={name} type={name} name={name} required value={value} onChange={onChange} className="mt-2 block w-full rounded-md p-2 border text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 
     placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md" />
 </>;
 export const AuthForm = ({ title, buttonText, data, handleChange, handleSubmit }: 
