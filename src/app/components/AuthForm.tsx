@@ -16,7 +16,7 @@ export const AuthForm = ({ title, buttonText, data, handleChange, handleSubmit }
         <h2 className="text-center text-2xl sm:text-3xl font-bold text-gray-900 mb-6">{title}</h2>
         <form onSubmit={handleSubmit}>
             <Input name="name" type="text" value={data.name} onChange={handleChange} />
-            <Input name="email address" type="email" value={data.email} onChange={handleChange} />
+            <Input name="email" type="email" value={data.email} onChange={handleChange} />
             <Input name="password" type="password" value={data.password} onChange={handleChange} />
             <div className="mt-4">
                 <button type="submit" className="flex w-full justify-center rounded-md bg-sky-500 p-2 text-white text-xl sm:text-2xl font-bold border-0 shadow-sm 
