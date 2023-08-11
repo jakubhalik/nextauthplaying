@@ -3,7 +3,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter'; import { PrismaClient } fr
 const prisma = new PrismaClient();
 const authorize = async ({ name, email, password }: any) => { 
     if(!(name || email || password)) throw new Error("Incomplete credentials"); 
-    const user: any = await prisma.user.findUnique({ where: { email } }); if (!user) throw new Error("Account does not exist");
+    const user: any = await prisma.user.findUnique({ where: { name, email } }); if (!user) throw new Error("Account does not exist");
     const isValidPassword = await bcrypt.compare(password, user.hashedPassword); if (!isValidPassword) throw new Error("Wrong password");
     return user;
 };
