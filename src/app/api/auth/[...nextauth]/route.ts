@@ -8,8 +8,7 @@ const authorize = async ({ name, email, password }: any) => {
     return user;
 };
 const authOptions: { adapter: any, providers: any[], session: { strategy: 'jwt' }, secret: string, debug: boolean } = {
-    adapter: PrismaAdapter(prisma),
-    providers: [ CredentialsProvider({
+    adapter: PrismaAdapter(prisma), providers: [ CredentialsProvider({
             name: 'credentials', credentials: { username: { label: 'Username', type: 'text', placeholder: 'jsmith' }, password: { label: 'Password', type: 'password' } }, authorize 
         }) ], session: { strategy: 'jwt' }, secret: process.env.NEXTAUTH_SECRET!, debug: process.env.NODE_ENV === 'development'
 }; 
