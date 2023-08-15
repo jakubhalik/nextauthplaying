@@ -1,14 +1,12 @@
 'use client'; 
-import { useRouter } from 'next/navigation'; import { useFormState } from '../hooks/useFormState'; import { AuthForm } from '../components/AuthForm'; import { useState, FormEvent } from 'react';
-import ErrorComponent from '../components/ErrorComponent';
-export default function RegisterPage() { 
-    const [data, handleChange] = useFormState({ name: '', email: '', password: ''}); const [error, setError] = useState(null); const router = useRouter(); 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => { 
-        e.preventDefault(); const response = await fetch('/api/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); 
-        const result = await response.json(); if (result.error) { setError(result.message); } else { router.push('/login'); } 
-    }
-    return <>
-        {error && <ErrorComponent message={error} onClose={() => setError(null)} />}
-        <AuthForm title="Register an account" buttonText="Register" data={data} handleChange={handleChange} handleSubmit={handleSubmit} />
-    </>;
-}
+import { useRouter } from 'next/navigation'; import { withAuthForm } from '../components/withAuthForm'; import { AuthForm } from '../components/AuthForm';
+import { ChangeEvent, FormEvent } from 'react';
+const RegisterFunc = async (data: any) => { const response = await fetch('/api/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); } 
+const RegisterPage = withAuthForm(() => { 
+    const router = useRouter(); 
+    return <AuthForm title="Register an account" buttonText="Register" submitFunc={RegisterFunc} onSuccess={() => router.push('/login')} data={{}} 
+        handleChange={function (e: ChangeEvent<HTMLInputElement>): void { throw new Error('Function not implemented.'); } }
+        handleSubmit={function (e: FormEvent<HTMLFormElement>): void { throw new Error('Function not implemented.'); } } 
+    /> 
+}); 
+export default RegisterPage;
