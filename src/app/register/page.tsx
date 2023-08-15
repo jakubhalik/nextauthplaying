@@ -1,14 +1,9 @@
-'use client'; 
-import { useRouter } from 'next/navigation'; import { useFormState } from '../hooks/useFormState'; import { AuthForm } from '../components/AuthForm'; import { useState, FormEvent } from 'react';
-import ErrorComponent from '../components/ErrorComponent';
+'use client';
+import { AuthForm } from '../components/AuthForm';
 export default function RegisterPage() { 
-    const [data, handleChange] = useFormState({ name: '', email: '', password: ''}); const [error, setError] = useState(null); const router = useRouter(); 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => { 
-        e.preventDefault(); const response = await fetch('/api/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); 
-        const result = await response.json(); if (result.error) { setError(result.message); } else { router.push('/login'); } 
+    const registerCallback = async (data: { [key: string]: string }) => { 
+        const response = await fetch('/api/register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); const result = await response.json(); 
+        if (!response.ok) { throw new Error(result.message || 'Registration failed'); } return result;
     }
-    return <>
-        {error && <ErrorComponent message={error} onClose={() => setError(null)} />}
-        <AuthForm title="Register an account" buttonText="Register" data={data} handleChange={handleChange} handleSubmit={handleSubmit} />
-    </>;
+    return <AuthForm title="Register an account" buttonText="Register" actionCallback={registerCallback} push="/login" />
 }
