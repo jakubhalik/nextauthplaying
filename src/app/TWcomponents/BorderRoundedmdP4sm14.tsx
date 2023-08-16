@@ -1,2 +1,0 @@
-interface BorderRoundedmdP4sm14 { children: React.ReactNode }; 
-const BorderRoundedmdP4sm14: React.FC<BorderRoundedmdP4sm14> = ({ children }) => <div className="border rounded-md p-4 sm:p-14">{children}</div>; export default BorderRoundedmdP4sm14;
