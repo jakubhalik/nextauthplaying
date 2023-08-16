@@ -1,0 +1,2 @@
+interface CenteredBoldH2Mb6 { children: React.ReactNode }; 
+const CenteredBoldH2Mb6: React.FC<CenteredBoldH2Mb6> = ({ children }) => <div className="text-center text-2xl sm:text-3xl font-bold text-gray-900 mb-6">{children}</div>; export default CenteredBoldH2Mb6;
