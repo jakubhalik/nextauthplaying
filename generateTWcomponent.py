@@ -38,12 +38,13 @@ export default {name};
 
                     imports = re.findall(r'^import .+;?$', content, re.MULTILINE)
                     if imports:
-                        if len(imports) % 3 == 2:
-                            content = content.replace(imports[-1], imports[-1] + ' ' + import_statement)
+                        last_import = imports[-1]
+                        if len(last_import.split(';')) < 4:  # Check if there are fewer than 3 imports in the last line
+                            content = content.replace(last_import, f'{last_import} {import_statement}')
                         else:
-                            content = content.replace(imports[-1], imports[-1] + '\n' + import_statement)
+                            content = content.replace(last_import, f'{last_import}\n{import_statement}')
                     else:
-                        print(f"No import statements found in {file_path}. Skipping...")
+                        content = f'{import_statement}\n{content}'
 
                     # Save the modified content back
                     with open(file_path, 'w') as f:
