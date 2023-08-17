@@ -7,6 +7,7 @@ const {name}: React.FC<{name}Props> = ({{ children }}) =>
     <div className="{classes}">{{children}}</div>;
 export default {name};
 """
+
     # Save to a new file
     with open(f'src/app/TWcomponents/{name}.tsx', 'w') as f:
         f.write(component_code)
@@ -19,32 +20,15 @@ export default {name};
                 with open(file_path, 'r') as f:
                     content = f.read()
 
-                # Check for matching opening div
-                pattern_open = f'<div className="{classes}">'
-                if pattern_open in content:
-                    # Find the number of opening div tags after the matched tag before the closing div
-                    post_match = content.split(pattern_open, 1)[1]
-                    div_count = post_match.count('<div') + 1
-                    div_close_count = 0
+                # Regular expression to match any HTML element with the given class string
+                pattern_open = f'<([a-zA-Z]+) className="{classes}">'
+                match = re.search(pattern_open, content)
 
-                    # Iterate through the post match string and find the corresponding closing div
-                    idx = 0
-                    while div_close_count < div_count:
-                        if post_match[idx:idx+5] == '<div':
-                            div_count += 1
-                        elif post_match[idx:idx+6] == '</div>':
-                            div_close_count += 1
-                        idx += 1
-
-                    # Now, replace the corresponding closing div
-                    before = content[:content.rfind(pattern_open) + len(pattern_open)]
-                    after = post_match[idx:]
-                    middle = post_match[:idx].replace('</div>', f'</{name}>', 1)
-
-                    content = before + middle + after
-
-                    # Replace the matched opening tag
-                    content = content.replace(pattern_open, f'<{name}>', 1)
+                if match:
+                    tag = match.group(1)
+                    pattern_close = f'</{tag}>'
+                    content = content.replace(match.group(0), f'<{name}>', 1)
+                    content = content.replace(pattern_close, f'</{name}>', 1)
 
                     # Add the import statement
                     import_statement = f"import {name} from '../TWcomponents/{name}';"
