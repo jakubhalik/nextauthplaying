@@ -5,8 +5,7 @@ const {name}: React.FC<{name}Props> = ({{ children }}) =>
     <div className="{classes}">{{children}}</div>;
 export default {name};
 """
-    with open(f'src/app/TWcomponents/{name}.tsx', 'w') as f:
-        f.write(component_code)
+    with open(f'src/app/TWcomponents/{name}.tsx', 'w') as f: f.write(component_code)
     for root, _, files in os.walk('src/app'):
         for file in files:
             if file.endswith('.tsx') and file != f"{name}.tsx":
