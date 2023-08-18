@@ -9,7 +9,7 @@ export default {name};
         f.write(component_code)
     for root, _, files in os.walk('src/app'):
         for file in files:
-            if file.endswith('.tsx'):
+            if file.endswith('.tsx') and file != f"{name}.tsx":
                 file_path = os.path.join(root, file)
                 with open(file_path, 'r') as f:
                     content = f.read()
