@@ -11,6 +11,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ title, buttonText, actionCal
     return <>
         {error && <ErrorComponent message={error} onClose={() => setError(null)} />}
         <TWFlexJustifyCenterPy24_3xl56><TWBorderRoundedmdP4sm14>
+            <h1 className="x q">testiiing</h1>
             <TWFlexJustifyCenterBoldText2xlsm3xlMb6>{title}</TWFlexJustifyCenterBoldText2xlsm3xlMb6>
             <form onSubmit={handleSubmit}>
                 {Object.keys(data).map(key => { 
