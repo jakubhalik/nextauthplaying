@@ -11,8 +11,7 @@ export default {name};
         for file in files:
             if file.endswith('.tsx') and file != f"{name}.tsx":
                 file_path = os.path.join(root, file)
-                with open(file_path, 'r') as f:
-                    content = f.read()
+                with open(file_path, 'r') as f: content = f.read()
                 pattern_open = re.compile(rf'<([a-zA-Z]+) className="{re.escape(classes)}">')
                 match = pattern_open.search(content)
                 if match:
