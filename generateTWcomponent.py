@@ -19,33 +19,23 @@ export default {name};
                 
                 modifications_snapshot[file_path] = content
                 
-                pattern_open = re.compile(rf'<([a-zA-Z]+)\s+className\s*=\s*"{re.escape(classes)}"\s*>')
-                match = pattern_open.search(content)
+                pattern_open = re.compile(rf'<([a-zA-Z]+)\s+className="{re.escape(classes)}"\s*>')
+                matches = pattern_open.findall(content)
                 
-                if match:
-                    tag = match.group(1)
-                    pattern_close = f'</{tag}>'
-                    content = content.replace(match.group(0), f'<{name}>', 1)
-                    content = content.replace(pattern_close, f'</{name}>', 1)
-                    
+                if matches:
+                    tag_to_replace = matches[0]
+                    content = re.sub(rf'<{tag_to_replace} className="{re.escape(classes)}">', f'<{name}>', content)
+                    content = re.sub(rf'</{tag_to_replace}>', f'</{name}>', content)
+
                     relative_path = os.path.relpath('src/app/TWcomponents', root).replace('\\', '/')
-                    if relative_path == 'TWcomponents': 
+                    if relative_path == '.':
                         relative_path = './TWcomponents'
-                    
                     import_statement = f"import {name} from '{relative_path}/{name}';"
-                    imports = re.findall(r'^import .+;?$', content, re.MULTILINE)
-                    
-                    if imports:
-                        last_import = imports[-1]
-                        if len(last_import.split(';')) < 4: 
-                            content = content.replace(last_import, f'{last_import} {import_statement}')
-                        else: 
-                            content = content.replace(last_import, f'{last_import}\n{import_statement}')
-                    else: 
+                    if import_statement not in content:
                         content = f'{import_statement}\n{content}'
                     
-                    with open(file_path, 'w') as f: 
-                        f.write(content)
+                with open(file_path, 'w') as f: 
+                    f.write(content)
     
     snapshot = { 'component_name': name, 'modifications': modifications_snapshot }
     with open('undoSnapshot.txt', 'w') as f: 
