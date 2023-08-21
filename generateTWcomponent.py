@@ -30,9 +30,14 @@ export default {name};
                         else: content = content.replace(last_import, f'{last_import}\n{import_statement}')
                     else: content = f'{import_statement}\n{content}'
                     with open(file_path, 'w') as f: f.write(content)
-    with open('undoSnapshot.txt', 'w') as f: json.dump(modifications_snapshot, f)
+    snapshot = { 'component_name': name, 'modifications': modifications_snapshot }
+    with open('undoSnapshot.txt', 'w') as f: json.dump(snapshot, f)
 def ungenerate():
-    with open('undoSnapshot.txt', 'r') as f: modifications_snapshot = json.load(f)
+    if not os.path.exists('undoSnapshot.txt'): print("Nothing that was generated to ungenerate."); return
+    with open('undoSnapshot.txt', 'r') as f: snapshot = json.load(f)
+    component_name = snapshot['component_name']; modifications_snapshot = snapshot['modifications']
+    component_file_path = f'src/app/TWcomponents/{component_name}.tsx'
+    if os.path.exists(component_file_path): os.remove(component_file_path)
     for file_path, original_content in modifications_snapshot.items(): 
         with open(file_path, 'w') as f: f.write(original_content)
     os.remove('undoSnapshot.txt')
