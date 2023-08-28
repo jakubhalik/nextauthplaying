@@ -1,3 +1,12 @@
+```bash
+npx create-next-app@latest # default to everything, ts, tailwind, app router
+npm i next-auth bcrypt
+npm install --save @types/bcrypt
+npm install @prisma/client @auth/prisma-adapter
+npm install prisma --save-dev
+npx prisma generate
+```
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
