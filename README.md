@@ -4,7 +4,7 @@ npm i next-auth bcrypt
 npm install --save @types/bcrypt
 npm install @prisma/client @auth/prisma-adapter
 npm install prisma --save-dev
-npx prisma generate
+npx prisma generate # run this after every change in schema.prisma
 ```
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
