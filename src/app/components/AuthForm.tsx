@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react'; import { useRouter } from 'next/navigation'; import { useFormState } from '../hooks/useFormState'; import ErrorComponent from '../components/ErrorComponent';
 import TWLabel from '../TWcomponents/TWLabel'; import TWInput from '../TWcomponents/TWInput'; import TWSubmitButton from '../TWcomponents/TWSubmitButton'; import TWMt4 from '../TWcomponents/TWMt4';
-import TWFlexJustifyCenterPy24_3xl56 from '../TWcomponents/TWFlexJustifyCenterPy24_3xl56'; import TWBorderRoundedmdP4sm14 from '../TWcomponents/TWBorderRoundedmdP4sm14'; import TWFlexJustifyCenterBoldText2xlsm3xlMb6 from '../TWcomponents/TWFlexJustifyCenterBoldText2xlsm3xlMb6';
+import TWFlexJustifycenterPy24_3xl56 from '../TWcomponents/TWFlexJustifyCenterPy24_3xl56'; import TWBorderRoundedmdP4sm14 from '../TWcomponents/TWBorderRoundedmdP4sm14'; import TWFlexJustifycenterBoldText2xlsm3xlMb6 from '../TWcomponents/TWFlexJustifyCenterBoldText2xlsm3xlMb6';
 type AuthFormProps = { title: string, buttonText: string, actionCallback: (data: {[key: string]: string}) => Promise<any>, push: string, mode: "login" | "register" }
 export const AuthForm: React.FC<AuthFormProps> = ({ title, buttonText, actionCallback, push, mode }) => { 
     const initialData = mode === "login" ? { identifier: '', password: '' } : { name: '', email: '', password: '' }; const [data, handleChange] = useFormState(initialData); 
@@ -11,8 +11,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({ title, buttonText, actionCal
     };
     return <>
         {error && <ErrorComponent message={error} onClose={() => setError(null)} />}
-        <TWFlexJustifyCenterPy24_3xl56><TWBorderRoundedmdP4sm14>
-            <TWFlexJustifyCenterBoldText2xlsm3xlMb6>{title}</TWFlexJustifyCenterBoldText2xlsm3xlMb6>
+        <TWFlexJustifycenterPy24_3xl56><TWBorderRoundedmdP4sm14>
+            <TWFlexJustifycenterBoldText2xlsm3xlMb6>{title}</TWFlexJustifycenterBoldText2xlsm3xlMb6>
             <form onSubmit={handleSubmit}>
                 {Object.keys(data).map(key => { 
                     const inputKey = key as keyof typeof data; 
@@ -25,6 +25,6 @@ export const AuthForm: React.FC<AuthFormProps> = ({ title, buttonText, actionCal
                 })}
                 <TWMt4><TWSubmitButton>{buttonText}</TWSubmitButton></TWMt4>
             </form>
-        </TWBorderRoundedmdP4sm14></TWFlexJustifyCenterPy24_3xl56>
+        </TWBorderRoundedmdP4sm14></TWFlexJustifycenterPy24_3xl56>
     </>;
 }
